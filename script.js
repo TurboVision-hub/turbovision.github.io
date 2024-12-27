@@ -78,37 +78,161 @@ const projectsData = {
     project1: {
         title: "Site E-commerce",
         description: "Une plateforme e-commerce complète avec système de paiement intégré et gestion des stocks en temps réel.",
-        image: "./images/siteweb.jpg",
+        image: "./images/Ecom01.jpg",
         client: "BoutiquePro",
-        technologies: "React, Node.js, MongoDB",
+        technologies: "django, Javascript, html/css",
         date: "2024"
     },
     project2: {
         title: "Application Mobile",
         description: "Application mobile de gestion de tâches avec synchronisation cloud et notifications.",
-        image: "./images/application.jpg",
+        image: "./images/gestionscolaire.jpg",
         client: "TaskMaster",
-        technologies: "React Native, Firebase",
+        technologies: "Flutter, Firebase",
         date: "2024"
     },
     project3: {
         title: "Logiciel de Gestion",
         description: "Solution de gestion d'entreprise personnalisée avec modules de facturation et CRM.",
-        image: "./images/application.jpg",
+        image: "./images/Gestiondeproj.jpg",
         client: "GestionPro",
-        technologies: "C#, .NET, SQL Server",
+        technologies: "java, Postgree SQL",
         date: "2024"
     },
     project4: {
         title: "Série Publicitaire",
         description: "Production d'une série de spots publicitaires pour une campagne digitale.",
-        videoUrl: "./videos/montage.mp4",
+        videoUrl: "./videos/montage01.mp4",
         thumbnail: "./images/logo.jpg",
         client: "MediaCorp",
         technologies: "Adobe Premiere, After Effects",
         date: "2024",
         type: "video"
+    },
+    project5: {
+        title: "application de Elearning",
+        description: "apprendre en ligne deviens plus facile avec Elearn.",
+        image: "./images/Elearning.jpg",
+        client: "MediaCorp",
+        technologies: "Adobe Premiere, After Effects",
+        date: "2024",
+        type: "video"
+    },
+    logo1: {
+        title: "Logo Entreprise",
+        description: "Création d'une identité visuelle moderne et professionnelle pour une entreprise de technologie.",
+        image: "images/11.jpg",
+        client: "TechCorp",
+        technologies: "Adobe Illustrator, Photoshop",
+        date: "2024"
+    },
+    logo2: {
+        title: "Logo Restaurant",
+        description: "Design d'un logo élégant et mémorable pour un restaurant gastronomique.",
+        image: "images/03.jpg",
+        client: "Le Gourmet",
+        technologies: "Adobe Illustrator, Photoshop",
+        date: "2024"
+    },
+    logo3: {
+        title: "Logo Restaurant",
+        description: "Design d'un logo élégant et mémorable pour un restaurant gastronomique.",
+        image: "images/13.jpg",
+        client: "Le Gourmet",
+        technologies: "Adobe Illustrator, Photoshop",
+        date: "2024"
+    },
+    logo4: {
+        title: "Logo Restaurant",
+        description: "Design d'un logo élégant et mémorable pour un restaurant gastronomique.",
+        image: "images/15.jpg",
+        client: "Le Gourmet",
+        technologies: "Adobe Illustrator, Photoshop",
+        date: "2024"
+    },
+    logo5: {
+        title: "Logo Restaurant",
+        description: "Design d'un logo élégant et mémorable pour un restaurant gastronomique.",
+        image: "images/20.jpg",
+        client: "Le Gourmet",
+        technologies: "Adobe Illustrator, Photoshop",
+        date: "2024"
+    },
+    design1: {
+        title: "Affiche Événement",
+        description: "Conception d'une affiche attractive pour un événement culturel majeur.",
+        image: "images/01.jpg",
+        client: "Festival des Arts",
+        technologies: "Adobe Photoshop, InDesign",
+        date: "2024"
+    },
+    design2: {
+        title: "Brochure Commerciale",
+        description: "Création d'une brochure professionnelle présentant les services de l'entreprise.",
+        image: "images/02.jpg",
+        client: "BusinessPro",
+        technologies: "Adobe InDesign, Illustrator",
+        date: "2024"
+    },
+    design3: {
+        title: "Brochure Commerciale",
+        description: "Création d'une brochure professionnelle présentant les services de l'entreprise.",
+        image: "images/06.jpg",
+        client: "BusinessPro",
+        technologies: "Adobe InDesign, Illustrator",
+        date: "2024"
+    },
+    design4: {
+        title: "Brochure Commerciale",
+        description: "Création d'une brochure professionnelle présentant les services de l'entreprise.",
+        image: "images/09.jpg",
+        client: "BusinessPro",
+        technologies: "Adobe InDesign, Illustrator",
+        date: "2024"
+    },
+    design5: {
+        title: "Brochure Commerciale",
+        description: "Création d'une brochure professionnelle présentant les services de l'entreprise.",
+        image: "images/10.jpg",
+        client: "BusinessPro",
+        technologies: "Adobe InDesign, Illustrator",
+        date: "2024"
+    },
+    design6: {
+        title: "Brochure Commerciale",
+        description: "Création d'une brochure professionnelle présentant les services de l'entreprise.",
+        image: "images/12.jpg",
+        client: "BusinessPro",
+        technologies: "Adobe InDesign, Illustrator",
+        date: "2024"
+    },
+    design7: {
+        title: "Brochure Commerciale",
+        description: "Création d'une brochure professionnelle présentant les services de l'entreprise.",
+        image: "images/16.jpg",
+        client: "BusinessPro",
+        technologies: "Adobe InDesign, Illustrator",
+        date: "2024"
+    },
+    design8: {
+        title: "Brochure Commerciale",
+        description: "Création d'une brochure professionnelle présentant les services de l'entreprise.",
+        image: "images/19.PNG",
+        client: "BusinessPro",
+        technologies: "Adobe InDesign, Illustrator",
+        date: "2024"
+    },
+    design9: {
+        title: "Brochure Commerciale",
+        description: "Création d'une brochure professionnelle présentant les services de l'entreprise.",
+        image: "images/17.jpg",
+        client: "BusinessPro",
+        technologies: "Adobe InDesign, Illustrator",
+        date: "2024"
     }
+
+
+    
 };
 
 // Filtrage du portfolio
