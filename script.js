@@ -158,6 +158,22 @@ const projectsData = {
         technologies: "Adobe Illustrator, Photoshop",
         date: "2024"
     },
+    logo6: {
+        title: "Logo Restaurant",
+        description: "Design d'un logo élégant et mémorable pour un restaurant gastronomique.",
+        image: "images/21.jpg",
+        client: "Le Gourmet",
+        technologies: "Adobe Illustrator, Photoshop",
+        date: "2024"
+    },
+    logo7: {
+        title: "Logo Restaurant",
+        description: "Design d'un logo élégant et mémorable pour un restaurant gastronomique.",
+        image: "images/22.jpg",
+        client: "Le Gourmet",
+        technologies: "Adobe Illustrator, Photoshop",
+        date: "2024"
+    },
     design1: {
         title: "Affiche Événement",
         description: "Conception d'une affiche attractive pour un événement culturel majeur.",
