@@ -315,22 +315,10 @@ input:checked + .slider:before {
 }
 
 .logo-container {
-    width: 80px;
-    height: 80px;
-    background: var(--gradient-accent);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 10px 30px rgba(239, 121, 135, 0.2);
-    animation: pulse 2s infinite;
-}
-
-.logo-container {
-    width: 450px;  /* Ajustez la taille selon vos besoins */
+    width: 450px;  /* Taille par défaut */
     height: 450px;
-    border-radius: 50%;
-    overflow: hidden;
+    border-radius: 50%; /* Arrondi complet */
+    overflow: hidden; /* Cache les débordements */
     background: var(--gradient-accent);
     display: flex;
     align-items: center;
@@ -338,30 +326,65 @@ input:checked + .slider:before {
     box-shadow: 0 10px 30px rgba(239, 121, 135, 0.3);
     margin-bottom: 1.5rem;
     margin-top: 1.5rem;
+    animation: pulse 2s infinite; /* Animation de pulsation */
 }
 
 .hero-logo {
-    width: 500px;
-    height: auto;
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
+    width: 100%; /* Prend 100% de la largeur du conteneur */
+    height: auto; /* Hauteur automatique pour garder les proportions */
+    max-width: 100%; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
+    max-height: 100%; /* S'assure que l'image ne dépasse pas la hauteur du conteneur */
+    object-fit: cover; /* Remplit le conteneur tout en gardant les proportions */
+    border-radius: 50%; /* Arrondi complet pour l'image */
 }
-@media (max-width: 768px){
-    .logo-container{
-        width: 400px;
+
+/* Media Queries pour ajuster la taille sur différents écrans */
+@media (max-width: 1024px) {
+    .logo-container {
+        width: 400px; /* Taille pour les écrans de taille moyenne */
         height: 400px;
         margin-top: 50px;
     }
 }
-@media (max-width: 480px){
-    .logo-container{
-        width: 350px;
+
+@media (max-width: 768px) {
+    .logo-container {
+        width: 350px; /* Taille pour les petits écrans */
         height: 350px;
         margin-top: 50px;
     }
 }
+
+@media (max-width: 480px) {
+    .logo-container {
+        width: 300px; /* Taille pour les très petits écrans */
+        height: 300px;
+        margin-top: 50px;
+    }
+}
+
+@media (max-width: 360px) {
+    .logo-container {
+        width: 250px; /* Taille pour les écrans très petits */
+        height: 250px;
+    }
+}
+
+@media (max-width: 320px) {
+    .logo-container {
+        width: 200px; /* Taille pour les écrans ultra petits */
+        height: 200px;
+    }
+}
+
+/* Ajout d'une media query pour les écrans de grande taille */
+@media (min-width: 1200px) {
+    .logo-container {
+        width: 500px; /* Taille pour les grands écrans */
+        height: 500px;
+    }
+}
+
 .logo-container i {
     font-size: 2.5rem;
     color: white;
@@ -1007,8 +1030,8 @@ footer {
     }
 
     .logo-container {
-        width: 60px;
-        height: 60px;
+        width: 160px;
+        height: 160px;
     }
 
     .logo-container i {
