@@ -116,7 +116,7 @@ const projectsData = {
         client: "MediaCorp",
         technologies: "Adobe Premiere, After Effects",
         date: "2024",
-        type: "video"
+       
     },
     logo1: {
         title: "Logo Entreprise",
