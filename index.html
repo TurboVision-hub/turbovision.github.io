@@ -1,652 +1,552 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="light">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Turbo-Vision - Solutions Digitales</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <title>Turbo Vision - Innovation & Création Digitale</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#1A1423',
+                        purple: '#372549',
+                        wine: '#774C60',
+                        coral: '#B75D69',
+                        beige: '#EACDC2',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-gradient {
+                @apply bg-clip-text text-transparent bg-gradient-to-r from-coral to-beige;
+            }
+            .bg-gradient {
+                @apply bg-gradient-to-r from-purple to-wine;
+            }
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+        }
+    </style>
+    <style>
+        /* Ajoutez ceci à votre fichier CSS ou dans une balise style */
+        .modal-open {
+            overflow: hidden;
+        }
+
+        #project-modal {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        #modal-image {
+            cursor: pointer;
+        }
+
+        #modal-image:hover {
+            opacity: 0.9;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-dark text-beige overflow-x-hidden">
+    <!-- Background Animation Canvas -->
+    <canvas id="bg-animation" class="fixed top-0 left-0 w-full h-full -z-10"></canvas>
+
     <!-- Navigation -->
-    <nav>
-        <div class="logo">
-            <h1 class="logo-text">Turbo Vision</h1> <!-- Remplacez l'image par un texte -->
-        </div>
-        <div class="nav-right">
-            <div class="theme-switch-wrapper">
-                <label class="theme-switch" for="checkbox">
-                    <input type="checkbox" id="checkbox" />
-                    <div class="slider round">
-                        <i class="fas fa-sun"></i>
-                        <i class="fas fa-moon"></i>
-                    </div>
-                </label>
-            </div>
-            <div class="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Section Hero avec animations -->
-    <section id="accueil" class="hero">
-        <div class="hero-animated-bg">
-            <div class="circles">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-        </div>
-        <div class="hero-content">
-            <div class="company-brand" data-aos="fade-down">
-                <div class="logo-container">
-                    <img src="images/11.jpg" alt="Logo Power Solutions" class="hero-logo">
-                </div>
-                <h1>
-                    <span class="company-name">Turbo Vision Solutions</span>
-                    <span class="tagline">Technologies & Services</span>
-                </h1>
-            </div>
-            <div class="hero-text" data-aos="fade-up" data-aos-delay="200">
-                <p class="main-subtitle">Votre Partenaire Digital de Confiance</p>
-                <div class="services-list">
-                    <span>Marketing Digital</span>
-                    <span class="separator">•</span>
-                    <span>Développement Web & Mobile</span>
-                    <span class="separator">•</span>
-                    <span>Solutions Informatiques</span>
-                </div>
-            </div>
-            <div class="hero-buttons" data-aos="fade-up" data-aos-delay="400">
-                <a href="#services" class="cta-button primary">Nos Services</a>
-                <a href="#contact" class="cta-button secondary">Contactez-nous</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Services -->
-    <section id="services" class="services">
-        <h2 data-aos="fade-up">Nos Services</h2>
-        <div class="services-grid">
-            <div class="service-card" data-aos="fade-up">
-                <i class="fas fa-camera-retro"></i>
-                <h3>Création Visuelle</h3>
-                <p>Production de contenu visuel professionnel et design graphique</p>
-                <ul class="service-details">
-                    <li>Photographie Professionnelle</li>
-                    <li>Vidéographie & Montage</li>
-                    <li>Création de Logos</li>
-                    <li>Design d'Affiches</li>
-                    <li>Identité Visuelle</li>
-                    <li>Retouche Photo</li>
-                    <li>Contenus pour Réseaux Sociaux</li>
-                    <li>Supports Marketing</li>
-                </ul>
-            </div>
-            <div class="service-card" data-aos="fade-up">
-                <i class="fas fa-camera"></i>
-                <h3>Vidéographie et Photographie</h3>
-                <p>Création de contenu visuel professionnel pour tous vos besoins</p>
-                <ul class="service-details">
-                    <li>Photographie Événementielle</li>
-                    <li>Shooting Photo Professionnel</li>
-                    <li>Retouche Photo</li>
-                    <li>Reportages Vidéo</li>
-                </ul>
-            </div>
-            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-                <i class="fas fa-video"></i>
-                <h3>Montage Vidéo</h3>
-                <p>Production et édition de contenu vidéo professionnel</p>
-                <ul class="service-details">
-                    <li>Spots Publicitaires</li>
-                    <li>Vidéos Corporate</li>
-                    <li>Motion Design</li>
-                    <li>Post-Production</li>
-                </ul>
-            </div>
-            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-                <i class="fas fa-laptop-code"></i>
-                <h3>Développement Web</h3>
-                <p>Sites web responsifs et applications web sur mesure</p>
-                <ul class="service-details">
-                    <li>Sites Vitrine</li>
-                    <li>E-commerce</li>
-                    <li>Applications Web</li>
-                    <li>SEO</li>
-                </ul>
-            </div>
-            <div class="service-card" data-aos="fade-up" data-aos-delay="300">
-                <i class="fas fa-mobile-alt"></i>
-                <h3>Applications Mobile</h3>
-                <p>Applications iOS et Android performantes</p>
-                <ul class="service-details">
-                    <li>iOS & Android</li>
-                    <li>UI/UX Design</li>
-                    <li>Applications natives</li>
-                    <li>Maintenance</li>
-                </ul>
-            </div>
-            <div class="service-card" data-aos="fade-up" data-aos-delay="400">
-                <i class="fas fa-desktop"></i>
-                <h3>Applications Desktop</h3>
-                <p>Applications bureau performantes et intuitives</p>
-                <ul class="service-details">
-                    <li>Applications Windows/Mac/Linux</li>
-                    <li>Logiciels de gestion</li>
-                    <li>Interfaces personnalisées</li>
-                    <li>Solutions métier</li>
-                </ul>
-            </div>
-            <div class="service-card" data-aos="fade-up" data-aos-delay="500">
-                <i class="fas fa-tools"></i>
-                <h3>Maintenance Informatique</h3>
-                <p>Support et maintenance de vos systèmes</p>
-                <ul class="service-details">
-                    <li>Maintenance préventive</li>
-                    <li>Dépannage informatique</li>
-                    <li>Administration système</li>
-                    <li>Sécurité & Backup</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Pourquoi Nous Choisir -->
-    <section class="why-us">
-        <h2 data-aos="fade-up">Pourquoi Nous Choisir ?</h2>
-        <div class="features-grid">
-            <div class="feature-card" data-aos="fade-up">
-                <i class="fas fa-clock"></i>
-                <h3>Réactivité & Disponibilité</h3>
-                <div class="feature-content">
-                    <p>Notre équipe est disponible 7j/7 pour répondre à vos besoins :</p>
-                    <ul>
-                        <li>Réponse sous 24h maximum</li>
-                        <li>Support technique dédié</li>
-                        <li>Intervention rapide</li>
-                        <li>Suivi personnalisé</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
-                <i class="fas fa-star"></i>
-                <h3>Qualité Premium</h3>
-                <div class="feature-content">
-                    <p>Nous garantissons des prestations haut de gamme :</p>
-                    <ul>
-                        <li>Technologies modernes</li>
-                        <li>Solutions optimisées</li>
-                        <li>Respect des standards</li>
-                        <li>Garantie satisfaction</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                <i class="fas fa-users"></i>
-                <h3>Équipe Experte</h3>
-                <div class="feature-content">
-                    <p>Des professionnels qualifiés à votre service :</p>
-                    <ul>
-                        <li>Formation continue</li>
-                        <li>Expertise multidomaine</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
-                <i class="fas fa-shield-alt"></i>
-                <h3>Fiabilité & Sécurité</h3>
-                <div class="feature-content">
-                    <p>Votre satisfaction et sécurité sont nos priorités :</p>
-                    <ul>
-                        <li>Solutions sécurisées</li>
-                        <li>Confidentialité garantie</li>
-                        <li>Backup automatique</li>
-                        <li>Maintenance préventive</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-        <!-- Section Portfolio avec amélioration -->
-        <section id="portfolio" class="portfolio">
-            <h2 data-aos="fade-up">Nos Réalisations</h2>
-            
-            <div class="portfolio-filters" data-aos="fade-up">
-                <button class="filter-btn active" data-filter="all">
-                    <i class="fas fa-th-large"></i> Tous
-                </button>
-                <button class="filter-btn" data-filter="logo">
-                    <i class="fas fa-pen-nib"></i> Logos
-                </button>
-                <button class="filter-btn" data-filter="design">
-                    <i class="fas fa-palette"></i> Design
-                </button>
-                <button class="filter-btn" data-filter="web">
-                    <i class="fas fa-globe"></i> Sites Web
-                </button>
-                <button class="filter-btn" data-filter="mobile">
-                    <i class="fas fa-mobile-alt"></i> Applications
-                </button>
-                <button class="filter-btn" data-filter="desktop">
-                    <i class="fas fa-desktop"></i> Logiciels
-                </button>
-                <button class="filter-btn" data-filter="video">
-                    <i class="fas fa-video"></i> Vidéos
-                </button>
-            </div>
-            
-    
-
-            <div class="portfolio-grid" data-aos="fade-up">
-                    <!-- Projet Logo 1 -->
-                <div class="portfolio-item" data-category="logo" data-project="logo1">
-                    <div class="portfolio-card">
-                        <img src="images/11.jpg" alt="Logo Design">
-                        <div class="portfolio-overlay">
-                            <h3>Logo Entreprise</h3>
-                            <p>Design de Logo</p>
-                            <button class="view-project">
-                                <i class="fas fa-eye"></i> Voir détails
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Projet Logo 2 -->
-                <div class="portfolio-item" data-category="logo" data-project="logo2">
-                    <div class="portfolio-card">
-                        <img src="images/03.jpg" alt="Logo Design">
-                        <div class="portfolio-overlay">
-                            <h3>Logo Restaurant</h3>
-                            <p>Design de Logo</p>
-                            <button class="view-project">
-                                <i class="fas fa-eye"></i> Voir détails
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Projet Logo 3 -->
-                <div class="portfolio-item" data-category="logo" data-project="logo3">
-                    <div class="portfolio-card">
-                        <img src="images/13.jpg" alt="Logo Design">
-                        <div class="portfolio-overlay">
-                            <h3>Logo Restaurant</h3>
-                            <p>Design de Logo</p>
-                            <button class="view-project">
-                                <i class="fas fa-eye"></i> Voir détails
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Projet Logo 4 -->
-                <div class="portfolio-item" data-category="logo" data-project="logo4">
-                    <div class="portfolio-card">
-                        <img src="images/15.jpg" alt="Logo Design">
-                        <div class="portfolio-overlay">
-                            <h3>Logo Restaurant</h3>
-                            <p>Design de Logo</p>
-                            <button class="view-project">
-                                <i class="fas fa-eye"></i> Voir détails
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Projet Logo 5 -->
-                <div class="portfolio-item" data-category="logo" data-project="logo5">
-                    <div class="portfolio-card">
-                        <img src="images/20.jpg" alt="Logo Design">
-                        <div class="portfolio-overlay">
-                            <h3>Logo Restaurant</h3>
-                            <p>Design de Logo</p>
-                            <button class="view-project">
-                                <i class="fas fa-eye"></i> Voir détails
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                    <!-- Projet Logo 6 -->
-                    <div class="portfolio-item" data-category="logo" data-project="logo6">
-                        <div class="portfolio-card">
-                            <img src="images/21.jpg" alt="Logo Design">
-                            <div class="portfolio-overlay">
-                                <h3>Logo Entreprise</h3>
-                                <p>Design de Logo</p>
-                                <button class="view-project">
-                                    <i class="fas fa-eye"></i> Voir détails
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                        <!-- Projet Logo 7 -->
-                <div class="portfolio-item" data-category="logo" data-project="logo7">
-                    <div class="portfolio-card">
-                        <img src="images/22.jpg" alt="Logo Design">
-                        <div class="portfolio-overlay">
-                            <h3>Logo Entreprise</h3>
-                            <p>Design de Logo</p>
-                            <button class="view-project">
-                                <i class="fas fa-eye"></i> Voir détails
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Projet Design 1 -->
-                <div class="portfolio-item" data-category="design" data-project="design1">
-                    <div class="portfolio-card">
-                        <img src="images/01.jpg" alt="Affiche Publicitaire">
-                        <div class="portfolio-overlay">
-                            <h3>Affiche Événement</h3>
-                            <p>Design Graphique</p>
-                            <button class="view-project">
-                                <i class="fas fa-eye"></i> Voir détails
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Projet Design 2 -->
-                <div class="portfolio-item" data-category="design" data-project="design2">
-                    <div class="portfolio-card">
-                        <img src="images/02.jpg" alt="Affiche Publicitaire">
-                        <div class="portfolio-overlay">
-                            <h3>Affiche Événement</h3>
-                            <p>Design Graphique</p>
-                            <button class="view-project">
-                                <i class="fas fa-eye"></i> Voir détails
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Projet Design 3 -->
-                <div class="portfolio-item" data-category="design" data-project="design3">
-                    <div class="portfolio-card">
-                        <img src="images/06.jpg" alt="Affiche Publicitaire">
-                        <div class="portfolio-overlay">
-                            <h3>Affiche Événement</h3>
-                            <p>Design Graphique</p>
-                            <button class="view-project">
-                                <i class="fas fa-eye"></i> Voir détails
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Projet Design 4 -->
-                <div class="portfolio-item" data-category="design" data-project="design4">
-                    <div class="portfolio-card">
-                        <img src="images/09.jpg" alt="Affiche Publicitaire">
-                        <div class="portfolio-overlay">
-                            <h3>Affiche Événement</h3>
-                            <p>Design Graphique</p>
-                            <button class="view-project">
-                                <i class="fas fa-eye"></i> Voir détails
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Projet Design 5 -->
-                <div class="portfolio-item" data-category="design" data-project="design5">
-                    <div class="portfolio-card">
-                        <img src="images/10.jpg" alt="Affiche Publicitaire">
-                        <div class="portfolio-overlay">
-                            <h3>Affiche Événement</h3>
-                            <p>Design Graphique</p>
-                            <button class="view-project">
-                                <i class="fas fa-eye"></i> Voir détails
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Projet Design 6 -->
-                <div class="portfolio-item" data-category="design" data-project="design6">
-                    <div class="portfolio-card">
-                        <img src="images/12.jpg" alt="Affiche Publicitaire">
-                        <div class="portfolio-overlay">
-                            <h3>Affiche Événement</h3>
-                            <p>Design Graphique</p>
-                            <button class="view-project">
-                                <i class="fas fa-eye"></i> Voir détails
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Projet Design 7 -->
-                <div class="portfolio-item" data-category="design" data-project="design7">
-                    <div class="portfolio-card">
-                        <img src="images/16.jpg" alt="Affiche Publicitaire">
-                        <div class="portfolio-overlay">
-                            <h3>Affiche Événement</h3>
-                            <p>Design Graphique</p>
-                            <button class="view-project">
-                                <i class="fas fa-eye"></i> Voir détails
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Projet Design 8 -->
-                <div class="portfolio-item" data-category="design" data-project="design8">
-                    <div class="portfolio-card">
-                        <img src="images/19.PNG" alt="Affiche Publicitaire">
-                        <div class="portfolio-overlay">
-                            <h3>Affiche Événement</h3>
-                            <p>Design Graphique</p>
-                            <button class="view-project">
-                                <i class="fas fa-eye"></i> Voir détails
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Projet Design 9 -->
-                <div class="portfolio-item" data-category="design" data-project="design1">
-                    <div class="portfolio-card">
-                        <img src="images/17.jpg" alt="Affiche Publicitaire">
-                        <div class="portfolio-overlay">
-                            <h3>Affiche Événement</h3>
-                            <p>Design Graphique</p>
-                            <button class="view-project">
-                                <i class="fas fa-eye"></i> Voir détails
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Projet 1 -->
-                <div class="portfolio-item" data-category="web" data-project="project1">
-                    <div class="portfolio-card">
-                            <img src="images/SiteEcom.jpg" alt="Site E-commerce">
-                        <div class="portfolio-overlay">
-                            <h3>Site E-commerce</h3>
-                            <p>Développement Web</p>
-                            <button class="view-project">
-                                <i class="fas fa-eye"></i> Voir détails
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Projet 5 -->
-                <div class="portfolio-item" data-category="web" data-project="project5">
-                    <div class="portfolio-card">
-                            <img src="images/Elearning.jpg" alt="Site E-commerce">
-                        <div class="portfolio-overlay">
-                            <h3>Site de E-learning</h3>
-                            <p>Développement Web</p>
-                            <button class="view-project">
-                                <i class="fas fa-eye"></i> Voir détails
-                            </button>
-                        </div>
+    <nav class="fixed w-full z-50 bg-dark/80 backdrop-blur-md transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="logo-container">
+                        <img src="images/logos/TurboVisionLogo.jpg" alt="Turbo Vision Logo" 
+                             class="h-12 rounded-full border-2 border-coral/30 hover:border-coral transition-colors duration-300">
                     </div>
                 </div>
                 
-    
-                <!-- Projet 2 -->
-                <div class="portfolio-item" data-category="mobile" data-project="project2">
-                    <div class="portfolio-card">
-                        <img src="images/gestionscolaire.jpg" alt="Application Mobile de gestionscolaire">
-                        <div class="portfolio-overlay">
-                            <h3>Application Mobile</h3>
-                            <p>Développement Mobile</p>
-                            <button class="view-project">
-                                <i class="fas fa-eye"></i> Voir détails
-                            </button>
-                        </div>
-                    </div>
+                <!-- Navigation Desktop -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link hover:text-coral transition-colors">Accueil</a>
+                    <a href="#services" class="nav-link hover:text-coral transition-colors">Services</a>
+                    <a href="#portfolio" class="nav-link hover:text-coral transition-colors">Portfolio</a>
+                    <a href="#about" class="nav-link hover:text-coral transition-colors">À propos</a>
+                    <a href="#contact" class="nav-link hover:text-coral transition-colors">Contact</a>
                 </div>
-    
-                <!-- Projet 3 -->
-                <div class="portfolio-item" data-category="desktop" data-project="project3">
-                    <div class="portfolio-card">
-                        <img src="images/Gestiondeproj.jpg" alt="Logiciel de Gestion de projets">
-                        <div class="portfolio-overlay">
-                            <h3>Logiciel de Gestion Scolaire</h3>
-                            <p>Application Desktop</p>
-                            <button class="view-project">
-                                <i class="fas fa-eye"></i> Voir détails
-                            </button>
-                        </div>
-                    </div>
-                </div>
-    
-                <!-- Projet 4 -->
-                <div class="portfolio-item" data-category="video" data-project="project4">
-                    <div class="portfolio-card">
-                        <div class="video-container">
-                            <video muted loop poster="./images/11.jpg">
-                                <source src="./videos/montage01.mp4" type="video/mp4">
-                            </video>
-                            <div class="video-play-icon">
-                                <i class="fas fa-play"></i>
-                            </div>
-                        </div>
-                        <div class="portfolio-overlay">
-                            <h3>Série Publicitaire</h3>
-                            <p>Production Vidéo</p>
-                            <button class="view-project">
-                                <i class="fas fa-eye"></i> Voir détails
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Modal -->
-            <div class="portfolio-modal">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 id="modal-title"></h3>
-                        <button class="close-modal">
-                            <i class="fas fa-times"></i>
-                        </button>
+                <!-- Burger Menu -->
+                <button class="md:hidden" id="burger-menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menu Mobile -->
+        <div class="md:hidden hidden transition-all duration-300" id="mobile-menu">
+            <div class="px-4 py-2 space-y-4 bg-dark/95 backdrop-blur-md">
+                <a href="#home" class="block hover:text-coral transition-colors">Accueil</a>
+                <a href="#services" class="block hover:text-coral transition-colors">Services</a>
+                <a href="#portfolio" class="block hover:text-coral transition-colors">Portfolio</a>
+                <a href="#about" class="block hover:text-coral transition-colors">À propos</a>
+                <a href="#contact" class="block hover:text-coral transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="relative">
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+            <div class="container mx-auto px-4">
+                <div class="text-center space-y-8">
+                    <h1 class="text-5xl md:text-7xl font-bold text-gradient leading-tight">
+                        TURBO VISION
+                    </h1>
+                    <p class="text-2xl md:text-3xl text-gradient">
+                        Innovation & Création Digitale
+                    </p>
+                    <p class="text-xl md:text-2xl opacity-90">
+                        Design • Développement • Création • Innovation
+                    </p>
+                    <div class="flex justify-center gap-4">
+                        <a href="#portfolio" 
+                           class="inline-block px-8 py-4 bg-coral rounded-full text-beige hover:transform hover:-translate-y-1 transition-all duration-300">
+                            Découvrir nos réalisations
+                        </a>
+                        <a href="#contact" 
+                           class="inline-block px-8 py-4 border-2 border-coral text-coral rounded-full hover:bg-coral hover:text-beige hover:transform hover:-translate-y-1 transition-all duration-300">
+                            Contactez-nous
+                        </a>
                     </div>
-                    <div class="modal-body">
-                        <div class="modal-media">
-                            <div id="modal-media-container"></div>
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Je continue avec les autres sections... -->
+                 <!-- Services Section -->
+        <section id="services" class="py-20 relative">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient">
+                    Nos Services
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Service Card 1 -->
+                    <div class="group bg-purple/30 backdrop-blur-md rounded-xl p-6 hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-coral text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-paint-brush"></i>
                         </div>
-                        <div class="modal-info">
-                            <div class="info-section">
-                                <h4>Description</h4>
-                                <p id="modal-description"></p>
-                            </div>
-                            <div class="project-details">
-                                <div class="detail-item">
-                                    <i class="fas fa-user"></i>
-                                    <h4>Client</h4>
-                                    <p id="modal-client"></p>
-                                </div>
-                                <div class="detail-item">
-                                    <i class="fas fa-code"></i>
-                                    <h4>Technologies</h4>
-                                    <p id="modal-tech"></p>
-                                </div>
-                                <div class="detail-item">
-                                    <i class="fas fa-calendar"></i>
-                                    <h4>Date</h4>
-                                    <p id="modal-date"></p>
-                                </div>
-                            </div>
+                        <h3 class="text-xl font-bold mb-4">Design Graphique</h3>
+                        <ul class="space-y-2 text-beige/80">
+                            <li class="flex items-center gap-2">
+                                <i class="fas fa-check text-coral"></i>
+                                Création de logos
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fas fa-check text-coral"></i>
+                                Identité visuelle
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fas fa-check text-coral"></i>
+                                Supports marketing
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fas fa-check text-coral"></i>
+                                Affiches publicitaires
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Service Card 2 -->
+                    <div class="group bg-purple/30 backdrop-blur-md rounded-xl p-6 hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-coral text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Développement Web</h3>
+                        <ul class="space-y-2 text-beige/80">
+                            <li class="flex items-center gap-2">
+                                <i class="fas fa-check text-coral"></i>
+                                Sites vitrine
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fas fa-check text-coral"></i>
+                                E-commerce
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fas fa-check text-coral"></i>
+                                Applications web
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fas fa-check text-coral"></i>
+                                Optimisation SEO
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Service Card 3 -->
+                    <div class="group bg-purple/30 backdrop-blur-md rounded-xl p-6 hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-coral text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Apps Mobile</h3>
+                        <ul class="space-y-2 text-beige/80">
+                            <li class="flex items-center gap-2">
+                                <i class="fas fa-check text-coral"></i>
+                                iOS & Android
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fas fa-check text-coral"></i>
+                                Applications hybrides
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fas fa-check text-coral"></i>
+                                PWA
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fas fa-check text-coral"></i>
+                                Maintenance
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Service Card 4 -->
+                    <div class="group bg-purple/30 backdrop-blur-md rounded-xl p-6 hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-coral text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Photo & Vidéo</h3>
+                        <ul class="space-y-2 text-beige/80">
+                            <li class="flex items-center gap-2">
+                                <i class="fas fa-check text-coral"></i>
+                                Shooting photo
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fas fa-check text-coral"></i>
+                                Montage vidéo
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fas fa-check text-coral"></i>
+                                Motion design
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fas fa-check text-coral"></i>
+                                Post-production
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="py-20 relative">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient">
+                    Nos Réalisations
+                </h2>
+
+                <!-- Portfolio Filters -->
+                <div class="flex flex-wrap justify-center gap-4 mb-12">
+                    <button class="filter-btn active px-6 py-2 rounded-full border-2 border-coral text-coral hover:bg-coral hover:text-beige transition-all duration-300"
+                            data-filter="all">
+                        Tout
+                    </button>
+                    <button class="filter-btn px-6 py-2 rounded-full border-2 border-coral text-coral hover:bg-coral hover:text-beige transition-all duration-300"
+                            data-filter="logo">
+                        Logos
+                    </button>
+                    <button class="filter-btn px-6 py-2 rounded-full border-2 border-coral text-coral hover:bg-coral hover:text-beige transition-all duration-300"
+                            data-filter="affiche">
+                        Affiches
+                    </button>
+                    <button class="filter-btn px-6 py-2 rounded-full border-2 border-coral text-coral hover:bg-coral hover:text-beige transition-all duration-300"
+                            data-filter="web">
+                        Sites Web
+                    </button>
+                    <!--<button class="filter-btn px-6 py-2 rounded-full border-2 border-coral text-coral hover:bg-coral hover:text-beige transition-all duration-300"
+                            data-filter="app">
+                        Applications
+                    </button>
+                    <button class="filter-btn px-6 py-2 rounded-full border-2 border-coral text-coral hover:bg-coral hover:text-beige transition-all duration-300"
+                            data-filter="photo">
+                        Photos
+                    </button>-->
+                </div>
+
+                <!-- Portfolio Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+                    <!-- Les items du portfolio seront générés dynamiquement via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 relative">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <h2 class="text-4xl md:text-5xl font-bold text-gradient">
+                            À propos de Turbo Vision
+                        </h2>
+                        <p class="text-lg text-beige/80">
+                            Chez Turbo Vision, nous repoussons les limites de l'innovation digitale. 
+                            Notre équipe d'experts passionnés transforme vos idées en réalités numériques exceptionnelles.
+                        </p>
+                        
+                        
+                    </div>
+                    
+                    <div class="relative">
+                        <img src="images/team/team.jpg" alt="Notre équipe" 
+                             class="rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300">
+                        <div class="absolute -bottom-6 -right-6 bg-coral p-6 rounded-xl">
+                            <p class="text-2xl font-bold">Plusieurs</p>
+                            <p class="text-sm">Années d'expertise</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-    
-        <!-- Section Contact -->
-        <section id="contact" class="contact">
-            <h2 data-aos="fade-up">Contactez-nous</h2>
-            <div class="contact-container">
-                <div class="contact-info">
-                    <div class="contact-card" data-aos="fade-up">
-                        <i class="fas fa-phone-alt"></i>
-                        <h3>Téléphone</h3>
-                        <a href="tel:+226 53754080">+226 53754080</a>
+                <!-- Contact Section -->
+                <section id="contact" class="py-20 relative">
+                    <div class="container mx-auto px-4">
+                        <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient">
+                            Contactez-nous
+                        </h2>
+        
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            <!-- Contact Info -->
+                            <div class="space-y-6">
+                                <div class="bg-purple/30 backdrop-blur-md rounded-xl p-6 hover:-translate-y-2 transition-all duration-300">
+                                    <i class="fas fa-map-marker-alt text-coral text-2xl mb-4"></i>
+                                    <h3 class="text-xl font-bold mb-2">Notre adresse</h3>
+                                    <p class="text-beige/80">Burkina Faso</p>
+                                    <p class="text-beige/80">Ouagadougou-Saaba</p>
+                                </div>
+        
+                                <div class="bg-purple/30 backdrop-blur-md rounded-xl p-6 hover:-translate-y-2 transition-all duration-300">
+                                    <i class="fas fa-phone text-coral text-2xl mb-4"></i>
+                                    <h3 class="text-xl font-bold mb-2">Téléphone</h3>
+                                    <p class="text-beige/80">+226 53754080</p>
+                                    <p class="text-beige/80">Lun-Ven: 9h-18h</p>
+                                </div>
+        
+                                <div class="bg-purple/30 backdrop-blur-md rounded-xl p-6 hover:-translate-y-2 transition-all duration-300">
+                                    <i class="fas fa-envelope text-coral text-2xl mb-4"></i>
+                                    <h3 class="text-xl font-bold mb-2">Email</h3>
+                                    <p class="text-beige/80">contact:visionturbo36@gmail.com</p>
+                                    <p class="text-beige/80">support:visionturbo36@gmail.com</p>
+                                </div>
+        
+                                <div class="bg-purple/30 backdrop-blur-md rounded-xl p-6 hover:-translate-y-2 transition-all duration-300">
+                                    <i class="fab fa-whatsapp text-coral text-2xl mb-4"></i>
+                                    <h3 class="text-xl font-bold mb-2">WhatsApp</h3>
+                                    <p class="text-beige/80">Contactez-nous directement</p>
+                                    <a href="https://wa.me/04864326" 
+                                       target="_blank"
+                                       class="inline-flex items-center gap-2 mt-4 px-6 py-3 bg-[#25D366] hover:bg-[#128C7E] rounded-full text-white transition-all duration-300">
+                                        <i class="fab fa-whatsapp"></i>
+                                        Démarrer la discussion
+                                    </a>
+                                </div>
+                            </div>
+        
+<!--                      
+                            <div class="lg:col-span-2">
+                                <form id="contact-form" class="bg-purple/30 backdrop-blur-md rounded-xl p-8">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div class="space-y-2">
+                                            <label for="name" class="block text-sm font-medium">Nom complet</label>
+                                            <input type="text" 
+                                                   id="name" 
+                                                   name="name" 
+                                                   required
+                                                   class="w-full px-4 py-2 rounded-lg bg-dark/50 border border-coral/30 focus:border-coral focus:ring-2 focus:ring-coral/50 transition-all duration-300">
+                                        </div>
+                                        
+                                        <div class="space-y-2">
+                                            <label for="email" class="block text-sm font-medium">Email</label>
+                                            <input type="email" 
+                                                   id="email" 
+                                                   name="email" 
+                                                   required
+                                                   class="w-full px-4 py-2 rounded-lg bg-dark/50 border border-coral/30 focus:border-coral focus:ring-2 focus:ring-coral/50 transition-all duration-300">
+                                        </div>
+                                        
+                                        <div class="space-y-2 md:col-span-2">
+                                            <label for="subject" class="block text-sm font-medium">Sujet</label>
+                                            <select id="subject" 
+                                                    name="subject" 
+                                                    required
+                                                    class="w-full px-4 py-2 rounded-lg bg-dark/50 border border-coral/30 focus:border-coral focus:ring-2 focus:ring-coral/50 transition-all duration-300">
+                                                <option value="">Sélectionnez un sujet</option>
+                                                <option value="Design Graphique">Design Graphique</option>
+                                                <option value="Développement Web">Développement Web</option>
+                                                <option value="Application Mobile">Application Mobile</option>
+                                                <option value="Photo & Vidéo">Photo & Vidéo</option>
+                                                <option value="Autre">Autre</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="space-y-2 md:col-span-2">
+                                            <label for="message" class="block text-sm font-medium">Message</label>
+                                            <textarea id="message" 
+                                                      name="message" 
+                                                      rows="6" 
+                                                      required
+                                                      class="w-full px-4 py-2 rounded-lg bg-dark/50 border border-coral/30 focus:border-coral focus:ring-2 focus:ring-coral/50 transition-all duration-300"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" 
+                                            class="mt-6 w-full px-8 py-4 bg-coral rounded-lg text-beige hover:bg-coral/90 transform hover:-translate-y-1 transition-all duration-300">
+                                        <span>Envoyer le message</span>
+                                    </button>
+                                </form>
+                            </div>-->
+                        </div>
                     </div>
-                    <div class="contact-card" data-aos="fade-up" data-aos-delay="100">
-                        <i class="fab fa-whatsapp"></i>
-                        <h3>WhatsApp</h3>
-                        <a href="https://wa.me/22653754080" target="_blank">Discuter sur WhatsApp</a>
+                </section>
+            </main>
+        
+            <!-- Footer -->
+            <footer class="bg-dark/95 border-t border-coral/20 pt-12">
+                <div class="container mx-auto px-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                        <div class="space-y-4">
+                            <img src="images/logos/TurboVisionLogo.jpg" alt="Turbo Vision Logo" 
+                                 class="h-12 rounded-full border-2 border-coral/30">
+                            <p class="text-beige/60">
+                                Turbo Vision - Innovation & Création Digitale
+                            </p>
+                            <div class="flex space-x-4">
+                                <a href="#" class="text-coral hover:text-beige transition-colors">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="text-coral hover:text-beige transition-colors">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="text-coral hover:text-beige transition-colors">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="text-coral hover:text-beige transition-colors">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                        </div>
+        
+                        <div class="space-y-4">
+                            <h4 class="text-xl font-bold">Navigation</h4>
+                            <ul class="space-y-2">
+                                <li><a href="#home" class="text-beige/60 hover:text-coral transition-colors">Accueil</a></li>
+                                <li><a href="#services" class="text-beige/60 hover:text-coral transition-colors">Services</a></li>
+                                <li><a href="#portfolio" class="text-beige/60 hover:text-coral transition-colors">Portfolio</a></li>
+                                <li><a href="#about" class="text-beige/60 hover:text-coral transition-colors">À propos</a></li>
+                                <li><a href="#contact" class="text-beige/60 hover:text-coral transition-colors">Contact</a></li>
+                            </ul>
+                        </div>
+        
+                        <div class="space-y-4">
+                            <h4 class="text-xl font-bold">Newsletter</h4>
+                            <p class="text-beige/60">Restez informé de nos dernières actualités</p>
+                            <form class="flex gap-2" action="https://formspree.io/f/mpwwoypk" method="POST">
+                                <input type="email" placeholder="Votre email" 
+                                       class="flex-1 px-4 py-2 rounded-lg bg-dark/50 border border-coral/30 focus:border-coral focus:ring-2 focus:ring-coral/50 transition-all duration-300">
+                                <button type="submit" 
+                                        class="px-6 py-2 bg-coral rounded-lg text-beige hover:bg-coral/90 transition-colors">
+                                    OK
+                                </button>
+                            </form>
+                        </div>
                     </div>
-                    <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
-                        <i class="fas fa-envelope"></i>
-                        <h3>Email</h3>
-                        <a href="mailto:visionpower36@gmail.com">visionpower36@gmail.com</a>
+        
+                    <div class="border-t border-coral/20 py-6 text-center text-beige/60">
+                        <p>&copy; 2024 Turbo Vision. Tous droits réservés.</p>
                     </div>
                 </div>
-    
-                <form class="contact-form" data-aos="fade-up" action="https://formspree.io/f/mdkkegak" method="POST">
-                    <h3>Envoyez-nous un message</h3>
-                    <input type="text" placeholder="Votre nom" required>
-                    <input type="email" placeholder="Votre email" required>
-                    <input type="tel" placeholder="Votre téléphone" required>
-                    <select required>
-                        <option value="">Sélectionnez un service</option>
-                        <option value="marketing">Marketing Digital</option>
-                        <option value="video">Montage Vidéo</option>
-                        <option value="web">Développement Web</option>
-                        <option value="mobile">Applications Mobile</option>
-                        <option value="desktop">Applications Desktop</option>
-                        <option value="maintenance">Maintenance Informatique</option>
-                </select>
-                <textarea placeholder="Votre message" required></textarea>
-                <button type="submit" class="submit-btn">Envoyer</button>
-            </form>
-            </div>
-        </section>
-    
-        <!-- Footer -->
-        <footer>
-            <div class="footer-content">
-                <div class="footer-info">
-                    <h3>Power-Solutions</h3>
-                    <p>Solutions digitales innovantes pour votre entreprise</p>
+            </footer>
+        
+            <!-- Scripts -->
+            <script src="js/main.js"></script>
+            <script src="js/three-background.js"></script>
+
+            <!-- Modal pour les projets -->
+            <div id="project-modal" class="fixed inset-0 z-50 hidden">
+                <!-- Overlay -->
+                <div class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+                
+                <!-- Modal Content -->
+                <div class="relative w-full max-w-4xl mx-auto mt-10 p-4">
+                    <!-- Bouton fermer -->
+                    <button id="close-modal" 
+                            class="absolute -top-2 -right-2 z-10 w-8 h-8 bg-coral text-white rounded-full flex items-center justify-center hover:bg-coral/80 transition-colors">
+                        <i class="fas fa-times"></i>
+                    </button>
+
+                    <!-- Contenu du projet -->
+                    <div class="bg-purple/30 backdrop-blur-md rounded-xl overflow-hidden">
+                        <!-- Image -->
+                        <div class="relative aspect-video">
+                            <img id="modal-image" 
+                                 src="" 
+                                 alt="Project Image" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        
+                        <!-- Informations -->
+                        <div class="p-6">
+                            <h3 id="modal-title" class="text-2xl font-bold mb-4 text-gradient"></h3>
+                            <p id="modal-description" class="text-beige/80"></p>
+                            
+                            <!-- Technologies utilisées -->
+                            <div class="mt-4">
+                                <h4 class="text-sm font-medium mb-2">Technologies utilisées :</h4>
+                                <div id="modal-tags" class="flex flex-wrap gap-2">
+                                    <!-- Les tags seront injectés ici -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="social-links">
-                    <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Power-Solutions. Tous droits réservés.</p>
-            </div>
-        </footer>
-    
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-        <script src="script.js"></script>
-    </body>
-    </html>
+        </body>
+        </html>

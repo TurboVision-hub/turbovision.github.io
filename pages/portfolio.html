@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Turbo Vision</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/portfolio.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+</head>
+<body>
+    <div id="background-animation"></div>
+    <!-- Même header que index.html avec chemins adaptés -->
+
+    <main class="portfolio-main">
+        <section class="portfolio-hero">
+            <h1 data-aos="fade-up">Nos Réalisations</h1>
+            <div class="portfolio-filters" data-aos="fade-up">
+                <button class="filter-btn active" data-filter="all">Tout</button>
+                <button class="filter-btn" data-filter="logo">Logos</button>
+                <button class="filter-btn" data-filter="web">Sites Web</button>
+                <button class="filter-btn" data-filter="app">Applications</button>
+                <button class="filter-btn" data-filter="photo">Photos</button>
+            </div>
+        </section>
+
+        <section class="portfolio-grid">
+            <!-- Les items seront générés dynamiquement via JavaScript -->
+        </section>
+
+        <div class="portfolio-modal">
+            <span class="modal-close">&times;</span>
+            <div class="modal-content">
+                <img src="" alt="">
+                <div class="modal-details">
+                    <h3></h3>
+                    <p class="project-description"></p>
+                    <p class="project-tech"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Même footer que index.html avec chemins adaptés -->
+
+    <script src="../js/portfolio.js"></script>
+</body>
+</html>
